@@ -34,9 +34,11 @@ router.post('/signup', function(req, res, next) {
     user.updatedby = user._id;
 
     // save to database using Model
-    user.save(function(err, result){
+    user.save(function(err, user){
         if(err) next(err);
-        res.redirect('/signin'); // redirect to other page
+        req.session.user = { _id: user._id, name: user.name, email: user.email, role:user.role};
+        req.flash('success', 'Welcome to Atutu!');
+        res.redirect('/');
     });
 });
 
@@ -47,7 +49,17 @@ router.get('/signin', function(req, res, next) {
 
 /* POST sign in action. */
 router.post('/signin', function(req, res, next) {
-    res.render('users/sign-in', { title: 'Sign In'});
+    // find email in Users
+    User.findOne({ email: req.body.email}, function(err, user){
+        if(err) throw err;
+        if(user == null || !User.compare(req.body.password, user.password)){
+            req.flash('warning', 'Your email does not exist or password is invalid.');
+            res.redirect('/signin');
+        }else { // user exists
+            req.session.user = { _id: user._id, name: user.name, email: user.email, role:user.role};
+            res.redirect('/');
+        }
+    });
 });
 
 module.exports = router;

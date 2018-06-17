@@ -5,6 +5,8 @@ var path = require('path');
 var logger = require('morgan');
 var favicon = require('serve-favicon');
 var mongoose = require('mongoose');
+var session = require('express-session');
+var flash = require('express-flash'); // for message
 
 // router
 var indexRouter = require('./routes/index');
@@ -30,6 +32,14 @@ mongoose.Promise = global.Promise; // use promise
 mongoose.connect('mongodb://127.0.0.1/ejsBlank'); // driverName://dbIP/dbName
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+// session : before routing
+app.use(session({
+    secret: 'ExpressEJSBlank@@', // any string for Security
+    resave: false,
+    saveUninitialized: true
+}));
+app.use(flash()); // after cookie, session
 
 // routes
 app.use('/', indexRouter);
