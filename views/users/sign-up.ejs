@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <% include ../partial/head %>
+    <title><%= title %></title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="card bg-light">
+            <article class="card-body mx-auto" style="max-width: 400px;">
+            	<h4 class="card-title mt-3 text-center">Create Account</h4>
+            	<p class="text-center">Get started with your free account</p>
+            	<p>
+            		<a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Login via Twitter</a>
+            		<a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
+            	</p>
+            	<p class="divider-text">
+                    <span class="bg-light">OR</span>
+                </p>
+                <div class="alert" role="alert"></div>
+            	<form id="signup" method="POST" action="/signup">
+                    <div class="form-group">
+                        <div class="input-group">
+                    		<div class="input-group-prepend">
+                    		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                    		 </div>
+                            <input type="text" name="name" class="form-control" placeholder="Full name" required>
+                        </div>
+                    </div><!-- form-group// -->
+                    <div class="form-group">
+                        <div class="input-group">
+                        	<div class="input-group-prepend">
+                    		    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                    		 </div>
+                            <input type="email" name="email" id="email" class="form-control" placeholder="Email address" required>
+                        </div>
+                    </div><!-- form-group// -->
+                    <div class="form-group">
+                        <div class="input-group">
+                        	<div class="input-group-prepend">
+                    		    <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+                    		</div>
+                    		<select name="phone1" class="custom-select" style="max-width: 120px;">
+                    		    <option selected="">select a Carrier</option>
+                    		    <option value="099">099</option>
+                    		    <option value="097">097</option>
+                    		    <option value="096">096</option>
+                    		</select>
+                        	<input type="text" name="phone2" class="form-control" placeholder="Phone number">
+                        </div>
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <div class="input-group">
+                        	<div class="input-group-prepend">
+                    		    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                    		</div>
+                    		<select name="job" class="form-control">
+                    			<option selected=""> Select job type</option>
+                    			<option value="Student">Student</option>
+                    			<option value="Teacher">Teacher</option>
+                                <option value="Office worker">Office worker</option>
+                    			<option value="Ect.">Ect.</option>
+                    		</select>
+                        </div>
+                	</div> <!-- form-group end.// -->
+                    <div class="form-group">
+                        <div class="input-group">
+                        	<div class="input-group-prepend">
+                    		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    		</div>
+                            <input type="password" name="password" class="form-control" placeholder="Create password" required value="Password1">
+                        </div>
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <div class="input-group">
+                        	<div class="input-group-prepend">
+                    		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    		</div>
+                            <input type="password" name="confirm" class="form-control" placeholder="Repeat password" required value="Password1">
+                        </div>
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <input type="checkbox" name="terms" id="terms" required>
+                        <label for="terms">I read and agree to the <a href="javascript:$('#termsModal').modal('show');">terms of usage</a>.</label>
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
+                    </div> <!-- form-group// -->
+                    <p class="text-center">Have an account? <a href="/signin">Log In</a> </p>
+                </form>
+            </article>
+        </div> <!-- card.// -->
+
+        <div class="modal fade" id="termsModal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Terms of usage</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>The contents of terms of usage goes here.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+              </div>
+            </div>
+          </div>
+        </div> <!-- modal.// -->
+    </div>
+    <!--container end.//-->
+
+    <% include ../partial/scripts %>
+    <script type="text/javascript">
+        $(function () {
+            $.validator.addMethod("pwcheck", function(value) {
+               return /^[A-Za-z0-9\d=!\-@._*]*$/.test(value) // consists of only these
+                   && /[a-z]/.test(value) // has a lowercase letter
+                   && /[A-Z]/.test(value) // has a uppercase letter
+                   && /\d/.test(value) // has a digit
+            });
+            $.validator.addMethod("pwcheck2", function(value) {
+               if( value.indexOf($('#email').val()) >= 0 ){
+                   return false;
+               }
+               return true;
+            });
+            $('#signup').validate({
+                rules: {
+                    'terms': {
+                        required: true
+                    },
+                    'confirm': {
+                        equalTo: '[name="password"]'
+                    },
+                    'password':{
+                        pwcheck: true,
+                        pwcheck2: true
+                    }
+                },
+                messages: {
+                    password: {
+                        pwcheck: "Type in uppercase letters, lowercase letters, and numbers.",
+                        pwcheck2: "Do not contain your email."
+                    }
+                },
+                submitHandler: submitHandler,
+                highlight: function (input) {
+                    $(input).addClass('is-invalid');
+                },
+                unhighlight: function (input) {
+                    $(input).removeClass('is-invalid');
+                },
+                errorPlacement: function (error, element) {
+                    $(element).parents('.input-group').append(error);
+                    $(element).parents('.form-group').append(error);
+                },
+            });
+            // validataion submitHandler
+            function submitHandler(form, event) {
+              event.preventDefault();
+              $.post(
+                  '/dupEmail',
+                  { email: $('#email').val() }
+              ).done(function(res){
+                  if(!res.success){
+                      $('.alert').show().addClass('alert-warning').text(res.msg);
+                      $('#email').select();
+                  }else{
+                      form.submit();
+                  }
+              }).fail(function(err){
+                  $('.alert').show().addClass('alert-danger').text(err.status + ' ' + err.responseText);
+              });
+            }
+        });
+    </script>
+</body>
+
+</html>
