@@ -4,6 +4,7 @@ var cookieParser = require('cookie-parser');
 var path = require('path');
 var logger = require('morgan');
 var favicon = require('serve-favicon');
+var mongoose = require('mongoose');
 
 // router
 var indexRouter = require('./routes/index');
@@ -23,6 +24,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // plugins in node modules
 app.use('/js', express.static(__dirname + '/node_modules/jquery-validation/dist'));
+
+//Set up mongoose connection
+mongoose.Promise = global.Promise; // use promise
+mongoose.connect('mongodb://127.0.0.1/ejsBlank'); // driverName://dbIP/dbName
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // routes
 app.use('/', indexRouter);
