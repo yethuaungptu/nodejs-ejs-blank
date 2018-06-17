@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <% include ../partial/head %>
+    <title><%= title %></title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="card bg-light">
+            <article class="card-body mx-auto" style="max-width: 400px;">
+            	<h4 class="card-title mt-3 text-center">Sign in</h4>
+            	<p class="text-center">Sign in to Atutu</p>
+            	<p>
+            		<a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Login via Twitter</a>
+            		<a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
+            	</p>
+            	<p class="divider-text">
+                    <span class="bg-light">OR</span>
+                </p>
+                <div class="alert" role="alert"></div>
+            	<form id="signin" method="POST" action="/signin">
+                    <div class="form-group mb-0">
+                        <p class="text-right mb-0"><label class="mb-1"><input type="checkbox" name="rememberme"> Remember me</label></p>
+                    </div><!-- form-group// -->
+                    <div class="form-group">
+                        <div class="input-group">
+                        	<div class="input-group-prepend">
+                    		    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                    		 </div>
+                            <input type="email" name="email" id="email" class="form-control" placeholder="Email address" required>
+                        </div>
+                    </div><!-- form-group// -->
+                    <div class="form-group mb-1">
+                        <p class="text-right mb-1"><a href="/forgotpw">Forgot password?</a> </p>
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <div class="input-group">
+                        	<div class="input-group-prepend">
+                    		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    		</div>
+                            <input type="password" name="password" class="form-control" placeholder="Create password" required value="Password1">
+                        </div>
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block"> Sign in </button>
+                    </div> <!-- form-group// -->
+                    <p class="text-center">Now to Aututu <a href="/signup">Create an account</a> </p>
+                </form>
+            </article>
+        </div> <!-- card.// -->
+
+        <div class="modal fade" id="termsModal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Terms of usage</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>The contents of terms of usage goes here.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+              </div>
+            </div>
+          </div>
+        </div> <!-- modal.// -->
+    </div>
+    <!--container end.//-->
+
+    <% include ../partial/scripts %>
+    <script type="text/javascript">
+        $(function () {
+            $('#signin').validate({
+                highlight: function (input) {
+                    $(input).addClass('is-invalid');
+                },
+                unhighlight: function (input) {
+                    $(input).removeClass('is-invalid');
+                },
+                errorPlacement: function (error, element) {
+                    $(element).parents('.form-group').append(error);
+                },
+            });
+        });
+    </script>
+</body>
+
+</html>

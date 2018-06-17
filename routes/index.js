@@ -42,7 +42,12 @@ router.post('/signup', function(req, res, next) {
 
 /* GET sign in page. */
 router.get('/signin', function(req, res, next) {
-    res.end('Sign in page');
-  //res.render('users/sign-in', { title: 'Sign In'});
+    res.render('users/sign-in', { title: 'Sign In'});
 });
+
+/* POST sign in action. */
+router.post('/signin', function(req, res, next) {
+    res.render('users/sign-in', { title: 'Sign In'});
+});
+
 module.exports = router;

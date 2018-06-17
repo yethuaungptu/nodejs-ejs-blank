@@ -126,7 +126,7 @@
                    && /\d/.test(value) // has a digit
             });
             $.validator.addMethod("pwcheck2", function(value) {
-               if( value.indexOf($('#email').val()) >= 0 ){
+               if( $('#email').val() != '' && value.indexOf($('#email').val()) >= 0 ){
                    return false;
                }
                return true;
@@ -158,7 +158,6 @@
                     $(input).removeClass('is-invalid');
                 },
                 errorPlacement: function (error, element) {
-                    $(element).parents('.input-group').append(error);
                     $(element).parents('.form-group').append(error);
                 },
             });
