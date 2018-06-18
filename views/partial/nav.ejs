@@ -1,12 +1,11 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Left</a>
+            </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="//codeply.com">Codeply</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
@@ -14,6 +13,31 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="#">Express EJS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <% if(locals.user) {%>
+                <li class="nav-item">
+                    <a class="nav-link" href="/signout"><i class="fas fa-sign-out-alt" data-toggle="tooltip" title="Sign out"></i></a>
+                </li>
+            <% } else { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/signup"><i class="fas fa-user-plus" data-toggle="tooltip" title="Create Account"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/signin"><i class="fas fa-sign-in-alt" data-toggle="tooltip" title="Sign in"></i></a>
+                </li>
+            <% } %>
         </ul>
     </div>
 </nav>

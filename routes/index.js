@@ -61,5 +61,10 @@ router.post('/signin', function(req, res, next) {
         }
     });
 });
+/* GET sign out. */
+router.get('/signout', function(req, res, next) {
+    req.session.destroy();
+    res.redirect('/');
+});
 
 module.exports = router;
