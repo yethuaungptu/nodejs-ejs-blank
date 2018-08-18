@@ -29,7 +29,7 @@ app.use('/js', express.static(__dirname + '/node_modules/jquery-validation/dist'
 
 //Set up mongoose connection
 mongoose.Promise = global.Promise; // use promise
-mongoose.connect('mongodb://127.0.0.1/ejsBlank'); // driverName://dbIP/dbName
+mongoose.connect('mongodb://yethuaung:zikimi95@ds125272.mlab.com:25272/genius'); // driverName://dbIP/dbName
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
