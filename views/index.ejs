@@ -26,5 +26,10 @@
 
     <% include partial/scripts %>
 </body>
+<script type="text/javascript">
+  <% if(locals.user){%>
+      alert('welcome back <%=locals.user.name%>');
+  <%}%>
+</script>
 
 </html>
